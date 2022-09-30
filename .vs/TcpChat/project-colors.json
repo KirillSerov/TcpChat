@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b35236a6-dede-4f54-87a9-e84f58d397db": {
+      "ProjectGuid": "b35236a6-dede-4f54-87a9-e84f58d397db",
+      "DisplayName": "TcpChatLib",
+      "ColorIndex": 0
+    },
+    "b0aba08a-7986-45a0-b7bc-fd914e65caf3": {
+      "ProjectGuid": "b0aba08a-7986-45a0-b7bc-fd914e65caf3",
+      "DisplayName": "TcpClientWpf",
+      "ColorIndex": 1
+    },
+    "06e4afe0-b953-4b7c-939c-5e2a5ff571d0": {
+      "ProjectGuid": "06e4afe0-b953-4b7c-939c-5e2a5ff571d0",
+      "DisplayName": "TcpServerConsole",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 3
+}

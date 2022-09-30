@@ -1,0 +1,11 @@
+D:\Programming\C#\Test\TcpChat\TcpChatLib\bin\Debug\net5.0\TcpChatLib.deps.json
+D:\Programming\C#\Test\TcpChat\TcpChatLib\bin\Debug\net5.0\TcpChatLib.dll
+D:\Programming\C#\Test\TcpChat\TcpChatLib\bin\Debug\net5.0\ref\TcpChatLib.dll
+D:\Programming\C#\Test\TcpChat\TcpChatLib\bin\Debug\net5.0\TcpChatLib.pdb
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.AssemblyInfoInputs.cache
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.AssemblyInfo.cs
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.csproj.CoreCompileInputs.cache
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.dll
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\ref\TcpChatLib.dll
+D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.pdb

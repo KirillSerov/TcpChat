@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YSqA3aHy0tZ0v7JbNtM+18cFWRKNgSppmQ5UA9nrF6ZXbzToUM9Z0zRsE+4bNDMeo6F9Z/VkroWHhhwMleyRoA==",
+  "success": true,
+  "projectFilePath": "D:\\Programming\\C#\\Test\\TcpChat\\TcpServerConsole\\TcpServerConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}
