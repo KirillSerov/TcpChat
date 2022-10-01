@@ -9,4 +9,3 @@ D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.csproj.Cor
 D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.dll
 D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\ref\TcpChatLib.dll
 D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.pdb
-D:\Programming\C#\Test\TcpChat\TcpChatLib\obj\Debug\net5.0\TcpChatLib.csproj.AssemblyReference.cache
