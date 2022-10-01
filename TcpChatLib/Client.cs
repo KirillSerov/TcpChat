@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -12,32 +13,42 @@ namespace TcpChatLib
     {
         private TcpClient _server;
         public event Action<string> Notify;
-        private NetworkStream _stream;
+        public StreamReader Reader { get; set; }
+        public StreamWriter Writer { get; set; }
         public Client(string _host, int port)
         {
             _server = new(_host, port);
-            _stream = _server.GetStream();
+            Reader = new StreamReader(_server.GetStream());
+            Writer = new StreamWriter(_server.GetStream());
+            Writer.AutoFlush = true;
         }
 
         public void Send(string message)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
-            _stream.Write(buffer, 0, buffer.Length);
+            Writer?.WriteLine(message);
         }
         public void Receive(string username = "")
         {
-            Send(username);
-            while (true)
+            try
             {
-                StringBuilder message = new StringBuilder();
-                do
+                Send(username);
+                while (true)
                 {
-                    byte[] buffer = new byte[255];
-                    int bytes = _stream.Read(buffer, 0, buffer.Length);
-                    message.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
-                } while (_stream.DataAvailable);
-                Notify?.Invoke(message.ToString());
+                    string message = Reader.ReadLine();
+                    Notify?.Invoke(message);
+                }
             }
+            catch { }
+            finally
+            {
+                Close();
+            }
+        }
+        public void Close()
+        {
+            Reader?.Close();
+            Writer?.Close();
+            _server?.Dispose();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TcpClientWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        Client client;
+        Client _client;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,22 +30,26 @@ namespace TcpClientWpf
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            client = new("127.0.0.1", 8888);
-            client.Notify += MessageHandler;
+            _client = new("127.0.0.1", 8888);
+            _client.Notify += MessageHandler;
             string username = Username.Text;
-            Thread t = new(() => client.Receive(username));
+            Thread t = new(() => _client.Receive(username));
             t.Start();
         }
 
         private void MessageHandler(string message)
         {
             Dispatcher.Invoke(()=> Chat.Text += message + "\n");
-           // Chat.Text += message + "\n";
         }
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            client.Send(Message.Text);
+            _client.Send(Message.Text);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _client.Close();
         }
     }
 }

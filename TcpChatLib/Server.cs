@@ -25,17 +25,19 @@ namespace TcpChatLib
         }
         public void Connect()
         {
-            _server.Start();
-            Notify?.Invoke("Сервер запущен");
             try
             {
+                _server.Start();
+                Notify?.Invoke("Сервер запущен");
                 while (true)
                 {
                     var client = _server.AcceptTcpClient();
                     Notify?.Invoke("Кто-то подключился");
                     ClientObject newClient = new ClientObject(client);
                     _clients.Add(newClient);
-                    StartChat(newClient);
+                    Thread t = new Thread(() => StartChat(newClient));
+                    t.Start();
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -44,61 +46,47 @@ namespace TcpChatLib
             }
             finally
             {
-                _server.Stop();
                 Notify?.Invoke("Сервер остановлен");
+                _server.Stop();
             }
         }
         private void StartChat(ClientObject client)
         {
-            Thread t = new Thread(() =>
+            try
             {
-                try
+                client.Username = Receive(client.Reader, client);
+                while (true)
                 {
-                    client.Username = Receive(client.Stream, client);
-                    while (true)
-                    {
-                        var message = $"{client.Username}: {Receive(client.Stream, client)}";
-                        SendAllClients(client, message);
-                    }
+                    var message = $"{client.Username}: {Receive(client.Reader, client)}";
+                    SendAllClients(message);
                 }
-                catch (Exception ex)
-                {
-                    Notify?.Invoke("Сервер: " + ex.Message);
-                }
-                finally
-                {
-                    if (client.Stream != null)
-                    {
-                        client.Stream.Dispose();
-                    }
-                    client.Close();
-                }
-            });
-            t.Start();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                Notify?.Invoke($"{client.Username} отключился");
+                client.Close();
+                _clients.Remove(client);
+            }
         }
-        private string Receive(NetworkStream clientStream, ClientObject client)
+        private string Receive(StreamReader clientStream, ClientObject client)
         {
-            StringBuilder message = new StringBuilder();
-            byte[] buffer = new byte[255];
-            do
-            {
-                int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                message.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
-            } while (clientStream.DataAvailable);
-            Notify?.Invoke(message.ToString());
+            string message = clientStream?.ReadLine();
+            Notify?.Invoke(message);
             return message.ToString();
         }
-        private void Send(NetworkStream clientStream, string message)
+        private void Send(StreamWriter clientStream, string message)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
-            clientStream.Write(buffer, 0, buffer.Length);
+            clientStream?.WriteLine(message);
         }
-        private void SendAllClients(ClientObject client, string message)
+        private void SendAllClients(string message)
         {
             foreach (var cl in _clients)
             {
-                if (cl != null && cl.Stream != null)
-                    Send(cl.Stream, message);
+                Send(cl.Writer, message);
             }
         }
     }
