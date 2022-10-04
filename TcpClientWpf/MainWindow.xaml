@@ -5,14 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TcpClientWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
+        Title="TcpChatClient" MinHeight="450" MinWidth="800" Height="450" Width="800" FontSize="14" Closing="Window_Closing">
     <Grid>
-        <Button x:Name="Connect" Content="Connect" HorizontalAlignment="Left" Margin="558,27,0,0" VerticalAlignment="Top" Height="48" Width="188" Click="Connect_Click"/>
-        <TextBox x:Name="Chat" HorizontalAlignment="Center" Margin="0,101,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="691" Height="217" IsReadOnly="True" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="ConnectionStatus" Width="64" Height="64" Source="Resources/Disconnected.png"/>
+                    <TextBlock Text="Username: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                    <TextBox x:Name="Username" VerticalAlignment="Center" Grid.Column="2" Margin="0" MaxLength="20" Padding="10"/>
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="Connect" Content="Connect" Click="Connect_Click" Margin="10"/>
+                    <Button Grid.Row="1" x:Name="Disconnect" Content="Disconnect" Click="Disconnect_Click" Margin="10" IsEnabled="False"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBox x:Name="Chat" HorizontalAlignment="Stretch" Margin="10" TextWrapping="Wrap" IsReadOnly="True" 
                  IsReadOnlyCaretVisible="false" VerticalScrollBarVisibility="Auto"/>
-        <TextBox x:Name="Message" HorizontalAlignment="Left" Margin="58,354,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="511" Height="33"/>
-        <Button x:Name="Send" Content="Отправить" HorizontalAlignment="Left" Margin="612,356,0,0" VerticalAlignment="Top" Height="31" Width="134" Click="Send_Click"/>
-        <TextBox x:Name="Username" HorizontalAlignment="Left" Margin="285,27,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="234" Height="42"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox x:Name="Message" HorizontalAlignment="Stretch" Margin="10" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Grid.Column="0"/>
+                <Button x:Name="Send" Content="Отправить" Margin="10" Click="Send_Click" Grid.Column="1" IsEnabled="False"/>
+            </Grid>
+        </Grid>
 
     </Grid>
 </Window>

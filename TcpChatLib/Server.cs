@@ -32,8 +32,8 @@ namespace TcpChatLib
                 while (true)
                 {
                     var client = _server.AcceptTcpClient();
-                    Notify?.Invoke("Кто-то подключился");
                     ClientObject newClient = new ClientObject(client);
+                    
                     _clients.Add(newClient);
                     Thread t = new Thread(() => StartChat(newClient));
                     t.Start();
@@ -55,9 +55,13 @@ namespace TcpChatLib
             try
             {
                 client.Username = Receive(client.Reader, client);
+                var helloMessage = $"{client.Username} подключился";
+                Notify?.Invoke(helloMessage);
+                SendAllClients(helloMessage);
                 while (true)
                 {
                     var message = $"{client.Username}: {Receive(client.Reader, client)}";
+                    Notify?.Invoke(message);
                     SendAllClients(message);
                 }
             }
@@ -67,7 +71,9 @@ namespace TcpChatLib
             }
             finally
             {
-                Notify?.Invoke($"{client.Username} отключился");
+                var byeMessage = $"{client.Username} отключился";
+                Notify?.Invoke(byeMessage);
+                SendAllClients(byeMessage);
                 client.Close();
                 _clients.Remove(client);
             }
@@ -75,7 +81,6 @@ namespace TcpChatLib
         private string Receive(StreamReader clientStream, ClientObject client)
         {
             string message = clientStream?.ReadLine();
-            Notify?.Invoke(message);
             return message.ToString();
         }
         private void Send(StreamWriter clientStream, string message)

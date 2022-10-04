@@ -8,7 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="pics\**" />
+    <EmbeddedResource Remove="pics\**" />
+    <None Remove="pics\**" />
+    <Page Remove="pics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Connected.png" />
+    <None Remove="Resources\Disconnected.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TcpChatLib\TcpChatLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Connected.png" />
+    <Resource Include="Resources\Disconnected.png" />
   </ItemGroup>
 
 </Project>

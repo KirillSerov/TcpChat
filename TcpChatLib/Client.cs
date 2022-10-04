@@ -17,7 +17,14 @@ namespace TcpChatLib
         public StreamWriter Writer { get; set; }
         public Client(string _host, int port)
         {
-            _server = new(_host, port);
+            try
+            {
+                _server = new(_host, port);
+            }
+            catch
+            {
+                throw new Exception("Не удалось подключиться");
+            }
             Reader = new StreamReader(_server.GetStream());
             Writer = new StreamWriter(_server.GetStream());
             Writer.AutoFlush = true;
